@@ -21,7 +21,7 @@
 			document.login.submit()
 		}
 	</script>
-	<h1>테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트ㅍ</h1>
+	
 	<table border=0 cellspacing=1 cellpadding=4 width=300 bgcolor=#4a4a4a>
 		<tr>
 			<td width=400 align=center bgcolor=white>
