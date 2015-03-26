@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="ogh" extends="struts-default"><!-- 오경희용 -->
+		<interceptors>
+			<interceptor name = "ibatis" class = "test.interceptor.IbatisInterceptor"/>
+		</interceptors>
+		
+		
+		<action name="goback" class="ogh.GobackAction">
+			<interceptor-ref name = "prepare"/>
+			<interceptor-ref name = "modelDriven"/>
+		    <interceptor-ref name = "params"/>
+		    <interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis"/>
+			<result>/member/goback.jsp</result>
+		</action>
+		<action name="totalschedule" class="ogh.TotalScheduleAction">
+			<interceptor-ref name="ibatis"></interceptor-ref>
+			<result>/member/totalschedule.jsp</result>
+		</action>
+		
+		<action name="schedulesearch" class = "ogh.ScheduleSearchAction">
+			<interceptor-ref name = "prepare"/>
+			<interceptor-ref name = "modelDriven"/>
+		    <interceptor-ref name = "params"/>
+		    <interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis"/>
+			<result>/member/totalschedule.jsp</result>
+		</action>
+		
+		<action name="myschedule" class="ogh.MyScheduleAction">
+			<interceptor-ref name = "params"/>
+		    <interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis"></interceptor-ref>
+			<result>/member/myschedule.jsp</result>
+		</action>
+		
+		<action name = "gobackSubmit" class = "ogh.GobackSubmitAction">
+			<interceptor-ref name = "params"/>
+		    <interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis"/>
+			<result name = "submit">/member/goback_submit.jsp</result>
+		</action>
+	</package>
+</struts>

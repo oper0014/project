@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="pjs" extends="struts-default"><!-- 박주성용 -->
+		<interceptors>
+			<interceptor name="ibatis" class="test.interceptor.IbatisInterceptor" />
+		</interceptors>
+
+		<action name="stduentinfo" class="pjs.StduentinfoAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis" />
+			<result>/member/stduentinfo.jsp</result>
+		</action>
+		<action name="grade" class="pjs.GradeAction">
+		  <interceptor-ref name="prepare" />
+		  <interceptor-ref name="modelDriven" />
+		  <interceptor-ref name="params" />
+		  <interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis" />
+			<result>/member/grade.jsp</result>
+		</action>
+		<action name="army" class="pjs.ArmyAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis" />
+			<result>/member/army.jsp</result>
+		</action>
+		<action name="armyform" class="pjs.ArmyFormAction">
+			<result>/member/armyform.jsp</result>
+		</action>
+		<action name="armypro" class="pjs.ArmyProAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis" />
+			<result>/member/armypro.jsp</result>
+		</action>
+		<action name="armydel" class="pjs.ArmyDelAction">
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis" />
+			<result>/member/armydel.jsp</result>
+		</action>
+	</package>
+
+
+</struts>

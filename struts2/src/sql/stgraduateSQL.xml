@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ 	
+<sqlMap namespace = "graduate">
+	<typeAlias alias="gradto" type = "test.action.MemberDTO"/>
+	<resultMap class="gradto" id = "graRes">
+		<result property = "id" column ="id"/>
+		<result property = "name" column ="name"/>
+		<result property = "major" column = "major"/>
+		<result property = "major2" column = "major2"/>
+		<result property = "minor" column = "minor"/>
+		<result property = "grade" column = "grade"/>
+		<result property = "state" column = "state"/>	
+		<result property = "total" column = "total"/>	
+	</resultMap>
+	
+	<select id = "selectGra" resultMap = "graRes">
+		select * from student where state!=4 and grade like '4%' or grade like '3%' order by grade desc 
+	</select>
+
+	<update id = "graduate" parameterClass="String">
+		update student set state='4' where id=#id#
+	</update>
+	
+	<select id = "selectGraRe" resultMap = "graRes" parameterClass="String">
+		select * from student where id=#id# 
+	</select>
+
+</sqlMap>
+ 
+
+

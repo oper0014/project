@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ 	
+ 	
+ <sqlMap namespace = "subject">
+	<typeAlias alias="subdto" type="test.databean.TotalsubjectDTO" />
+	<resultMap class= "subdto" id = "subRes">
+		<result property = "snumber" column = "snumber"/>
+		<result property = "sname" column = "sname"/>
+		<result property = "stime" column = "stime"/>
+		<result property = "sclass" column = "sclass"/>
+		<result property = "scredit" column = "scredit"/>
+		<result property = "proid" column = "proid"/>
+		<result property = "ssection" column = "ssection"/>
+		<result property = "majorname" column = "majorname"/>
+		<result property = "majornum" column = "majornum"/>
+		<result property = "proname" column = "name"/>
+	</resultMap>
+	
+	<select id = "selectAll" resultMap = "subRes">
+		select* from subject left join major on subject.ssection=major.majornum left join student on subject.proid=student.id
+	</select>
+	
+	<select id = "selectmajor" resultMap = "subRes" parameterClass = "String">
+		select* from subject left join major on subject.ssection=major.majornum left join student on subject.proid=student.id
+		where subject.ssection=#major#
+	</select>
+	
+	<select id = "selecttime" resultMap = "subRes" parameterClass = "Integer">
+		select* from subject left join major on subject.ssection=major.majornum left join student on subject.proid=student.id
+		where subject.stime=#time#
+	</select>
+
+</sqlMap>
+ 

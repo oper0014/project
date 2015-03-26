@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="dyj" extends="struts-default"><!-- 도예진용 -->
+		 
+	<interceptors>        
+			<interceptor name="ibatis" class="test.interceptor.IbatisInterceptor"/>
+	</interceptors> 
+	
+		<action name="my_schedule" class="dyj.MyScheduleAction">
+				<result>/member/my_schedule.jsp</result>
+		</action>
+		 
+		<action name="info_modify" class="dyj.InfoModifyAction">
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="servletConfig"/>
+			<interceptor-ref name="ibatis"/>
+				<result>/modify/info_modify.jsp</result>
+		</action>
+		
+		
+		<action name="info_modifyPro" class="dyj.InfoModifyProAction">
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="servletConfig"/>
+			<interceptor-ref name="ibatis"/>
+				<result>/modify/info_modifyok.jsp</result>
+		</action>
+ 		
+		
+		<action name="request" class="dyj.RequestAction">
+				<interceptor-ref name="servletConfig"/>
+					<result>/request/request_main.jsp</result>
+		</action>
+ 
+ 		<action name="request_insert" class="dyj.RequestInsertAction">
+ 	 				<result>/request/request_insert.jsp</result>
+ 		</action>
+ 		
+ 		
+ 		
+ 		<action name="request_insertPro" class="dyj.RequestInsertProAction">
+ 			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="servletConfig"/>
+			<interceptor-ref name="ibatis"/>
+			 	<result name="request_fail">/request/request_fail.jsp</result>
+	 			<result name="request_ok">/request/request_ok.jsp</result>
+	 			<result name="request_already">/request/request_already.jsp</result>
+	 			<result name="request_override">/request/request_override.jsp</result>
+	  </action>
+ 		
+ 		
+ 		
+ 		<action name="request_insert2" class="dyj.RequestInsert2Action">
+ 			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="servletConfig"/>
+			<interceptor-ref name="ibatis"/>
+ 				<result>/request/request_insert.jsp</result>
+ 		</action>
+	
+		
+		<action name="request_deletePro" class="dyj.RequestDeleteProAction">
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="servletConfig"/>
+			<interceptor-ref name="ibatis"/>
+				<result name="deleteok">/request/delete_ok.jsp</result>
+		</action>
+	
+	</package>
+</struts>

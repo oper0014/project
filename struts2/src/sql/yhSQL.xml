@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="yh">
+	<typeAlias alias="subjectdto2" type="test.databean.SubjectDTO" /><!-- subjectdto를 subjectdto2 로 변경 -->
+		<resultMap id = "Subject" class = "subjectdto2">
+			<result property="snumber" column = "snumber"/>
+			<result property="sname" column = "sname"/>
+			<result property="stime" column = "stime"/>
+			<result property="sclass" column = "sclass"/>
+			<result property="scredit" column = "scredit"/>
+			<result property="proid" column = "proid"/>
+			<result property="ssection" column = "ssection"/>
+		 
+		</resultMap>
+
+		<!-- select 쿼리문 정의 -->
+		<select id="selectSub" resultMap="Subject">
+			SELECT * FROM Subject order by snumber ASC
+		</select>
+		
+		<select id = "list" resultMap= "Subject" parameterClass = "subjectdto2">
+			select * from Subject where ssection=#ssection# order by snumber ASC
+		</select>
+		
+		<typeAlias alias="surveyDTO" type="test.databean.SurveyDTO"/> <!-- SurveyDOT를 survey로 변경 -->
+		<resultMap class="surveyDTO" id="survey">
+			<result property="id" column="id"/>
+			<result property="scontext" column="scontext"/>
+			<result property="score" column="score"/>
+		</resultMap>
+		
+		<!-- survey 쿼리문 정의 -->
+		<insert id = "survey_insert" parameterClass = "surveyDTO">
+			insert into survey(id, scontext, score)
+			values(#id#, #scontext#, #score#)
+		</insert>
+		
+		<select id = "survey_select" resultClass = "surveyDTO" parameterClass = "String">
+			select id from survey
+		</select>
+		
+		<typeAlias alias="gradeDTO" type="test.databean.gradeDTO"/>
+			<resultMap class="gradeDTO" id="grade">
+				<result property="credit" column="credit"/>
+			</resultMap>
+			
+			<select id = "grade_select" resultClass = "gradeDTO"  parameterClass = "String">
+				select credit from grade where id = #id#
+			</select>
+			
+			<typeAlias alias="class_planDTO" type = "test.databean.class_planDTO"/>
+			
+			<resultMap class="class_planDTO" id="class_plan">
+				<result property="snumber" column="snumber"/>
+				<result property="sname" column="sname"/>
+				<result property="sclass" column="sclass"/>
+				<result property="proid" column="proid"/>
+				<result property="stime" column="stime"/>
+				<result property="phonenumber1" column="phonenumber1"/>
+				<result property="phonenumber2" column="phonenumber2"/>
+				<result property="phonenumber3" column="phonenumber3"/>
+				<result property="mail1" column="mail1"/>
+				<result property="mail2" column="mail2"/>
+				<result property="curriculum" column="curriculum"/>
+				<result property="book" column="book"/>
+				<result property="d_contents" column="d_contents"/>
+			</resultMap>
+			
+			
+			<!-- class_plan 쿼리문 정의 -->
+			<select id = "class_plan_select" resultMap = "class_plan" parameterClass = "String">
+				select * from class_plan where snumber = #snumber#
+			</select>
+				
+</sqlMap>

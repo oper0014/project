@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="board">
+	<!-- 이 sql xml은 게시판 관련 사항을 작성합니다. 작성자 : 서동우 -->
+	<!-- 공지 게시판 정의 -->
+	<typeAlias alias="artboard" type="test.databean.boardDTO" />
+	<typeAlias alias="majorboard" type="test.databean.MajorDTO" />
+	<typeAlias alias="fileboard" type="test.databean.FileboardDTO" />
+	<!-- 공지 게시판 정의 -->
+	<resultMap id="boardRes" class="artboard">
+		<result property="no" column="no" />
+		<result property="subject" column="subject" />
+		<result property="id" column="id" />
+		<result property="major" column="major" />
+		<result property="content" column="content" />
+		<result property="readhit" column="readhit" />
+		<result property="regdate" column="regdate" />
+	</resultMap>
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="fileboardRes" class="fileboard">
+		<result property="no" column="no" />
+		<result property="subject" column="subject" />
+		<result property="id" column="id" />
+		<result property="major" column="major" />
+		<result property="content" column="content" />
+		<result property="file_orgname" column="file_orgName" />
+		<result property="file_savname" column="file_savName" />
+		<result property="readhit" column="readhit" />
+		<result property="regdate" column="regdate" />
+	</resultMap>
+	<resultMap id="majorboardRes" class="majorboard">
+		<result property="majornum" column="majornum" />
+		<result property="majorname" column="majorname" />
+	</resultMap>
+	<!-- 자신의 전공 찾기 -->
+	<select id="selectBoardmajor" resultClass="String"
+		parameterClass="String">
+		SELECT major FROM student where id=#id#
+	</select>
+
+	<!-- 공지게시판 select 쿼리문 정의 -->
+	<select id="selectBoardAll" resultMap="boardRes" parameterClass="String">
+		SELECT * FROM ARTBOARD where major=#major# ORDER BY no DESC
+	</select>
+	<!-- 파일게시판 select 쿼리문 정의 -->
+	<select id="selectFileBoardAll" resultMap="fileboardRes"
+		parameterClass="String">
+		SELECT * FROM FILEBOARD where major=#major# ORDER BY no
+		DESC
+	</select>
+	<!-- 공지게시판 조회수 증가 쿼리문 정의 -->
+	<update id="updateReadHit" parameterClass="int">
+		UPDATE ARTBOARD SET
+		READHIT = readHit + 1 WHERE no = #no#
+	</update>
+	<update id="updateReadHit2" parameterClass="int">
+		UPDATE FILEBOARD SET
+		READHIT = readHit + 1 WHERE no = #no#
+	</update>
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-all">
+		SELECT * FROM ARTBOARD
+	</sql>
+	<!-- 공통으로 사용할 where-no 절 정의 -->
+	<sql id="where-no">
+		WHERE no = #no#
+	</sql>
+	<select id="selectMajorAll" resultMap="majorboardRes">
+		SELECT * FROM MAJOR
+	</select>
+	<select id="selectOne" resultMap="boardRes" parameterClass="int">
+		SELECT * FROM ARTBOARD WHERE no = #no#
+	</select>
+	<select id="selectOne2" resultMap="fileboardRes" parameterClass="int">
+		SELECT * FROM FILEBOARD WHERE no = #no#
+	</select>
+	<select id="selectOneFile" resultMap="fileboardRes" parameterClass="int">
+		SELECT * FROM FILEBOARD WHERE no = #no#
+	</select>
+	<!-- 학생 비밀번호 찾기 -->
+	<select id="selectPw" resultClass="String" parameterClass="String">
+		SELECT pw FROM student where id=#id#
+	</select>
+	<!-- 자신의 새션 학생 교수 관리자 여부 찾기 -->
+	<select id="selectSection" resultClass="int" parameterClass="String">
+		SELECT section FROM student where id=#id#
+	</select>
+
+	<!-- insert 쿼리문 정의 -->
+	<insert id="insertartBoard" parameterClass="artboard">
+
+		INSERT INTO ARTBOARD
+		(NO,
+		SUBJECT,
+		ID,
+		MAJOR,
+		CONTENT,
+		REGDATE
+		)
+		VALUES (ARTBOARD_NO_SEQ.NEXTVAL,
+		#subject#,
+		#id#,
+		#major#,
+		#content#,
+		#regdate#
+		)
+	</insert>
+	<!-- insert 쿼리문 정의 -->
+	<insert id="insertartBoard2" parameterClass="fileboard">
+
+		INSERT INTO
+		FILEBOARD
+		(NO,
+		SUBJECT,
+		ID,
+		MAJOR,
+		CONTENT,
+		REGDATE
+		)
+		VALUES
+		(FILEBOARD_NO_SEQ.NEXTVAL,
+		#subject#,
+		#id#,
+		#major#,
+		#content#,
+		#regdate#
+		)
+	</insert>
+	<select id="selectLastNo" resultClass="fileboard" parameterClass="int">
+		SELECT max(no) as no FROM FILEBOARD
+	</select>
+	<select id="selectMajorName" resultClass="String" parameterClass="int">
+		SELECT majorname FROM MAJOR WHERE majornum=#majornum#
+	</select>
+	<update id="updateFile" parameterClass="fileboard">
+		UPDATE FILEBOARD SET FILE_ORGNAME = #file_orgname#,FILE_SAVNAME = #file_savname# WHERE no = #no#
+	</update>
+
+	<!-- delete 쿼리문 정의 -->
+	<delete id="deleteArtBoard" parameterClass="int">
+		DELETE FROM ARTBOARD
+		WHERE no = #no#
+	</delete>
+	<!-- delete 쿼리문 정의 -->
+	<delete id="deleteFileBoard" parameterClass="int">
+		DELETE FROM FILEBOARD
+		WHERE no = #no#
+	</delete>
+	<!-- update 쿼리문 정의 -->
+	<update id="updateArtBoard" parameterClass="artboard">
+		UPDATE ARTBOARD SET
+		SUBJECT = #subject#,CONTENT = #content# where no=#no#
+	</update>
+		<update id="updateFileBoard" parameterClass="fileboard">
+		UPDATE FILEBOARD SET
+		SUBJECT = #subject#,CONTENT = #content# where no=#no#
+	</update>
+	
+	<select id="selectId" resultClass="String" parameterClass="int">
+		SELECT id FROM ARTBOARD WHERE no = #no#
+	</select>
+	<select id="selectId2" resultClass="String" parameterClass="int">
+		SELECT id FROM FILEBOARD WHERE no = #no#
+	</select>
+	
+	
+	
+</sqlMap>

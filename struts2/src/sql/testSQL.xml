@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="test">
+	<typeAlias alias="dto" type="test.action.MemberDTO" />
+	<typeAlias alias="tuitiondto" type="test.action.TuitionDTO" />
+	<typeAlias alias="armydto" type="pjs.ArmyDTO" />
+	<typeAlias alias="Subjectdto" type="test.databean.SubjectDTO" />
+	<typeAlias alias="board" type="test.databean.boardDTO" />
+	<!-- 리절트 맵 정의 등록금 -->
+	<resultMap id="tuitionRes" class="tuitiondto">
+		<result property="id" column="id" />
+		<result property="money" column="money" />
+		<result property="checkmoney" column="checkmoney" />
+		<result property="term" column="term" />
+	</resultMap>
+	<!-- 리절트 맵 정의 군입영 -->
+	<resultMap id="armyRes" class="armydto">
+		<result property="id" column="id" />
+		<result property="askdate" column="askdate" />
+		<result property="join" column="join" />
+		<result property="discharge" column="discharge" />
+		<result property="armynumber" column="armynumber" />
+		<result property="state" column="state" />
+		<result property="reg_date" column="reg_date" />
+	</resultMap>
+	<!-- 리절트 맵 정의 학생 -->
+	<resultMap id="dto" class="dto">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="pw" column="pw" />
+		<result property="major" column="major" />
+		<result property="major2" column="major2" />
+		<result property="address" column="address" />
+		<result property="phonenumber1" column="phonenumber1" />
+		<result property="phonenumber2" column="phonenumber2" />
+		<result property="phonenumber3" column="phonenumber3" />
+		<result property="grade" column="grade" />
+		<result property="gender" column="gender" />
+		<result property="mail1" column="mail1" />
+		<result property="mail2" column="mail2" />
+		<result property="state" column="state" />
+	</resultMap>
+	<resultMap class="dto" id="dtoRes">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="pw" column="pw" />
+		<result property="major" column="major" />
+		<result property="major2" column="major2" />
+		<result property="minor" column="minor" />
+		<result property="address" column="address" />
+		<result property="phonenumber1" column="phonenumber1" />
+		<result property="phonenumber2" column="phonenumber2" />
+		<result property="phonenumber3" column="phonenumber3" />
+		<result property="grade" column="grade" />
+		<result property="gender" column="gender" />
+		<result property="mail1" column="mail1" />
+		<result property="mail2" column="mail2" />
+		<result property="state" column="state" />
+	</resultMap>
+
+	<!-- 학생 로그인 id,pw -->
+	<select id="pwCheck" resultClass="int" parameterClass="dto">
+		select
+		count(*) from student where id =#id# and pw=#pw#
+	</select>
+	<!-- 등록금 납부 정보 조회 -->
+	<select id="selectTuition" resultMap="tuitionRes"
+		parameterClass="String">
+		SELECT * FROM tuitiontest WHERE id = #id#
+	</select>
+	<!-- 군 입영 정보 조회 -->
+	<select id="selectArmy" resultMap="armyRes" parameterClass="String">
+		SELECT * FROM armyboard WHERE id = #id#
+	</select>
+	<!-- 군 입영 정보 삽입 -->
+	<insert id="insertArmy" parameterClass="armydto">
+		INSERT INTO armyboard
+		VALUES (
+		#id#,
+		SYSDATE,
+		#join#,
+		#discharge#,
+		#armynumber#,
+		#state#,
+		SYSDATE
+		)
+	</insert>
+	<!-- 군 입영 정보 삭제 -->
+	<delete id="delArmy" parameterClass="String">
+		DELETE FROM armyboard where
+		id = #id#
+	</delete>
+	<!-- 학생정보 -->
+	<select id="info_select" resultClass="dto" parameterClass="String">    <!-- 아이디 확인 -->
+		select * from student where id=#id#
+	</select>
+	<update id="info_update" parameterClass="dto"> <!-- 업데이트 수정 -->
+		update student set pw=#pw#, phonenumber1=#phonenumber1#,
+		phonenumber2=#phonenumber2#, phonenumber3=#phonenumber3#,
+		address=#address#, mail1=#mail1#,mail2=#mail2#
+		where id=#id#
+	</update>
+	<select id="student" resultMap="dto" parameterClass="String">
+		select *
+		from student where id=#id#
+	</select>
+	<!--2번 resultMap태그 정의 -->
+	<resultMap class="Subjectdto" id="testRes">
+		<result property="snumber" column="snumber" /> <!-- column이 디비레코드에 대응되는것 -->
+		<result property="sname" column="sname" />
+		<result property="stime" column="stime" />
+		<result property="sclass" column="sclass" />
+		<result property="scredit" column="scredit" />
+		<result property="proid" column="proid" />
+		
+			
+	</resultMap>
+	<!-- 1번 -->
+	<select id="selectAll" resultMap="testRes">    <!-- 레코드결과가 많이나올것으로 예상되면 resultMap 이다 -->
+		select * from subject
+	</select>
+	<select id="info_goback" resultMap="dtoRes" parameterClass="String">
+		select * from student where id=#id#
+	</select>
+
+
+	<update id="goback_submit" parameterClass="String">
+		update student set state =
+		case
+		when state = '0'
+		then '1'
+		when state = '1'
+		then '0'
+		end
+		where id=#id#
+	</update>
+
+
+
+</sqlMap>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="admin">
+		<typeAlias alias="adminSQL" type="admin.test.adminDTO" />
+		<typeAlias alias="memberdto" type="test.action.MemberDTO" />
+		<typeAlias alias="majorboard" type="test.databean.MajorDTO" />
+		<typeAlias alias="searchdto" type="test.databean.stSearchDTO" />
+		<typeAlias alias="searchSubject" type="test.databean.SerSubjectDTO" />
+		<typeAlias alias="subjectdto2" type="test.databean.SubjectDTO" />
+		<typeAlias alias="createsubject" type="test.databean.CreateSubjectDTO" />
+<resultMap id="admin" class="adminSQL">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="pw" column="pw" />
+		<result property="major" column="major" />
+		<result property="major2" column="major2" />
+		<result property="minor"  column="minor"/>
+		<result property="address" column="address" />
+		<result property="phonenumber1" column="phonenumber1" />
+		<result property="phonenumber2" column="phonenumber2" />
+		<result property="phonenumber3" column="phonenumber3" />
+		<result property="grade" column="grade" />
+		<result property="gender" column="gender" />
+		<result property="mail1" column="mail1" />
+		<result property="mail2" column="mail2" />
+		<result property="state" column="state" />
+		<result property="section" column="section"/>
+	</resultMap>
+		<insert id ="insertStudent" parameterClass="adminSQL" >
+	insert into student(id,name,pw,major,major2,minor,address,phonenumber1,phonenumber2,phonenumber3,
+			grade,gender,mail1,mail2,state,section)
+			values(#id#,#name#,#pw#,#major#,#major2#,#minor#,#address#,#phonenumber1#,#phonenumber2#,#phonenumber3#,
+			 #grade#,#gender#,#mail1#,#mail2#,#state#,#section#)
+		</insert>
+		<resultMap id="memberRes" class="memberdto">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="pw" column="pw" />
+		<result property="major" column="major" />
+		<result property="major2" column="major2" />
+		<result property="address" column="address" />
+		<result property="phonenumber1" column="phonenumber1" />
+		<result property="phonenumber2" column="phonenumber2" />
+		<result property="phonenumber3" column="phonenumber3" />
+		<result property="grade" column="grade" />
+		<result property="gender" column="gender" />
+		<result property="mail1" column="mail1" />
+		<result property="mail2" column="mail2" />
+		<result property="state" column="state" />
+		<result property="section" column="section" />
+	</resultMap>
+	<resultMap id="majorboardRes" class="majorboard">
+		<result property="majornum" column="majornum" />
+		<result property="majorname" column="majorname" />
+	</resultMap>
+	<!-- resultMap Subject -->
+	<resultMap id="subjectRes" class="subjectdto2">
+		<result property="snumber" column="snumber" />
+		<result property="sname" column="sname" />
+		<result property="sclass" column="sclass" />
+		<result property="scredit" column="scredit" />
+		<result property="proid" column="proid" />
+		<result property="ssection" column="ssection" />
+		<result property="year" column="year" />
+		<result property="term" column="term" />
+		<result property="grade" column="grade" />
+		<result property="max" column="max" />
+		<result property="count" column="count" />
+		<result property="sday" column="sday" />
+		<result property="stime" column="stime" />
+	</resultMap>
+	<!-- 과목 목록 -->
+	<select id="subjectSer"  resultMap="subjectRes" parameterClass="String">
+		select * from SUBJECT where year=#year# <!-- ssection=#ssection# and  --> 
+	</select>
+	<select id="subjectSer1"  resultMap="subjectRes" parameterClass="searchSubject">
+		select * from SUBJECT where year=#year# <!-- ssection=#ssection# and  --> 
+	</select>
+	<select id="subjectSer2"  resultMap="subjectRes" parameterClass="searchSubject">
+		select * from SUBJECT where year=#year# and grade=#grade# 
+	</select>
+	<select id="subjectSer3"  resultMap="subjectRes" parameterClass="searchSubject">
+		select * from SUBJECT where year=#year# and term=#term#
+	</select>
+	<select id="subjectSer4"  resultMap="subjectRes" parameterClass="searchSubject">
+		select * from SUBJECT where year=#year# and term=#term# and  grade=#grade# 
+	</select>
+	<select id="subjectOne"  resultMap="subjectRes" parameterClass="String">
+		select * from SUBJECT where snumber=#snumber# <!-- ssection=#ssection# and  --> 
+	</select>
+	<update id="updatesubjectOne" parameterClass="subjectdto2"> <!-- 업데이트 수정 복학-->
+		update SUBJECT set 
+		sname=#sname#,
+		sclass=#sclass#,
+		scredit=#scredit#,
+		proid=#proid#,
+		ssection=#ssection#,
+		year=#year#,
+		term=#term#,
+		grade=#grade#,
+		max=#max#,
+		sday=#sday#,
+		stime=#stime# where snumber=#snumber#
+	</update>
+	<delete id="deletesubjectOne" parameterClass="String">
+			DELETE FROM SUBJECT where snumber=#snumber#
+
+   		</delete>
+		
+	<!-- 자신의 전공 찾기 -->
+	<select id="selectBoardmajor" resultClass="String"
+		parameterClass="String">
+		SELECT major FROM student where id=#id#
+	</select>
+	<!-- Professor 교수 검색 -->
+	<select id="professorall"  resultMap="memberRes">
+		select * from student where section=2       <!--   and  gender=#gender# and state=#state# -->  
+	</select>
+	<!-- 학생 검색 -->
+	<select id="stall"  resultMap="memberRes" parameterClass="searchdto">
+		select * from student where major=#major# and grade=#grade# and  gender=#gender# and state=#state# and section=1       <!--   and  gender=#gender# and state=#state# -->  
+	</select>
+	<select id="stalla"  resultMap="memberRes" parameterClass="searchdto">
+		select * from student where major=#major# and gender=#gender# and state=#state# and section=1       <!--   and  gender=#gender# and state=#state# -->  
+	</select>
+	<select id="stall2"  resultMap="memberRes" parameterClass="searchdto">
+		select * from student where grade=#grade# and state=#state# and  gender=#gender# and section=1   <!--   and  gender=#gender# and state=#state# -->  
+	</select>
+	<select id="stall2a"  resultMap="memberRes" parameterClass="searchdto">
+		select * from student where gender=#gender# and state=#state# and section=1   <!--   and  gender=#gender# and state=#state# -->  
+	</select>
+	<select id="stall3"  resultMap="memberRes" parameterClass="searchdto">
+		select * from student where grade=#grade# and section=1 and state=#state#  <!--   and  gender=#gender# and state=#state# -->  
+	</select>
+	<select id="stall3a"  resultMap="memberRes" parameterClass="searchdto">
+		select * from student where section=1 and state=#state#   <!--   and  gender=#gender# and state=#state# -->  
+	</select>	
+	<select id="stall4"  resultMap="memberRes" parameterClass="searchdto">
+		select * from student where major=#major# and grade=#grade# and state=#state# and section=1       <!--   and  gender=#gender# and state=#state# -->  
+	</select>
+	<select id="stall4a"  resultMap="memberRes" parameterClass="searchdto">
+		select * from student where major=#major# and state=#state# and section=1       <!--   and  gender=#gender# and state=#state# -->  
+	</select>	
+	<select id="stpro"  resultMap="memberRes" parameterClass="String">
+		select * from student where id=#id#   <!--   and  gender=#gender# and state=#state# -->  
+	</select>
+	<select id="selectGrade" resultClass="String" parameterClass="String">
+		SELECT grade FROM student where id=#id#
+	</select>
+	<update id="st_update" parameterClass="memberdto"> <!-- 업데이트 수정 -->
+		update student set major=#major#,
+		major2=#major2#, minor=#minor#,
+		grade=#grade#, state=#state#
+		where id=#id#
+	</update>
+	<update id="st_update2a" parameterClass="String"> <!-- 업데이트 수정 -->
+		update student set grade='2학년' where id=#id#
+	</update>
+	<update id="st_update2b" parameterClass="String"> <!-- 업데이트 수정 -->
+		update student set grade='3학년' where id=#id#
+	</update>
+	<update id="st_update2c" parameterClass="String"> <!-- 업데이트 수정 -->
+		update student set grade='4학년' where id=#id#
+	</update>
+	<update id="st_update3a" parameterClass="String"> <!-- 업데이트 수정 휴학-->
+		update student set state='2' where id=#id#
+	</update>
+	<update id="st_update3b" parameterClass="String"> <!-- 업데이트 수정 복학-->
+		update student set state='1' where id=#id#
+	</update>
+	<!-- insert 쿼리문 정의 -->
+	<insert id="insertSubject" parameterClass="createsubject">
+		INSERT INTO SUBJECT
+		(SNUMBER,
+		SNAME,
+		SCLASS,
+		SCREDIT,
+		PROID,
+		SSECTION,
+		YEAR,
+		TERM,
+		GRADE,
+		MAX,
+		SDAY,
+		STIME
+		)
+		VALUES (
+		#snumber#,
+		#sname#,
+		#sclass#,
+		#scredit#,
+		#proid#,
+		#ssection#,
+		#year#,
+		#term#,
+		#grade#,
+		#max#,
+		#sday#,
+		#stime#
+		)
+	</insert>
+	</sqlMap>
+	

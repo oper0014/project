@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name = "struts.i18n.encoding" value="euc-kr"/>
+	<package name="admin" extends="struts-default"><!-- 윤호용 -->
+		<interceptors>
+			<interceptor name="ibatis" class="test.interceptor.IbatisInterceptor" />
+		</interceptors>
+		<action name="adminmenu" class="admin.test.MenuAction">
+			<result>/admin/menu.jsp</result>
+		</action>
+		<action name="sign" class="admin.test.SignAction">
+			<result>/admin/InsertStudent.jsp</result>
+		</action>
+		<action name="signPro" class="admin.test.signProAction">
+		<interceptor-ref name = "prepare"/>
+			<interceptor-ref name = "modelDriven"/>
+		    <interceptor-ref name = "params"/>
+		     <interceptor-ref name="ibatis"/>
+			<result>/admin/InsertStudent.jsp</result>
+		</action>
+		<action name="gradeform" class="admin.test.GradeFormAction">
+			<result>/admin/InsertGrade.jsp</result>
+		</action>
+		
+		<action name="gradePro" class="admin.test.gradeProAction">
+		  <interceptor-ref name = "prepare"/>
+			<interceptor-ref name = "modelDriven"/>
+		    <interceptor-ref name = "params"/>
+		     <interceptor-ref name="ibatis"/>
+			<result>/admin/InsertGrade.jsp</result>
+		</action>
+	 
+		<action name="stregister" class="admin.test.StRegisterAction">
+			<result>/admin/testaaaa.jsp</result>
+		</action>
+		<action name="createsubject" class="admin.test.CreateSubjectAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="ibatis" />
+			<result>/admin/createsubject.jsp</result>
+		</action>
+		<action name="createsubjectpro" class="admin.test.CreateSubjectProAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="ibatis" />
+			<result>/admin/createsubjectpro.jsp</result>
+		</action>
+		<action name="updatesubject" class="admin.test.UpdateSubjectAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="ibatis" />
+			<result name="delete">/admin/createsubjectpro.jsp</result>
+			<result>/admin/updatesubject.jsp</result>
+		</action>
+		<action name="stgraduation" class="admin.test.StGraduationAction">
+			<interceptor-ref name="ibatis"/>
+			<result>/admin/stgraduation.jsp</result>
+		</action>
+		<action name="graduation" class="admin.test.StGraduationProAction">
+			<interceptor-ref name = "prepare"/>
+			<interceptor-ref name ="params"/>
+		    <interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis"/>
+			<result>/admin/graduation.jsp</result>
+		</action>
+		<action name="stsearch" class="admin.test.StSearchAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis" />
+			<result>/search/searchlist.jsp</result>
+		</action>
+		<action name="stsrtpro" class="admin.test.StSrtProAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="ibatis" />
+			<result>/search/searchpro.jsp</result>
+		</action>
+		<action name="searchpro2" class="admin.test.StSrtProAction2">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="ibatis" />
+			<result>/search/searchpro2.jsp</result>
+		</action>
+		<action name="prosearch" class="admin.test.ProSearchAction">
+			<interceptor-ref name = "modelDriven"/>
+			<interceptor-ref name="ibatis"></interceptor-ref>
+			<result>/admin/prosearch.jsp</result>
+		</action>
+		<action name="promajorsearch" class="admin.test.ProMajorSearchAction">
+			<interceptor-ref name = "prepare"/>
+			<interceptor-ref name ="params"/>
+		    <interceptor-ref name="servletConfig" />
+			<interceptor-ref name="ibatis"/>
+			<result>/admin/prosearch.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ 	
+ <sqlMap namespace = "pro">
+ 	<typeAlias alias = "prodto" type = "test.action.MemberDTO" />
+ 	<resultMap class = "prodto" id = "proRes">
+ 		<result property = "id" column = "id"/>
+ 		<result property = "name" column = "name"/>
+ 		<result property = "major" column = "major"/>
+ 		<result property = "mail1" column = "mail1"/>
+ 		<result property = "mail2" column = "mail2"/>
+ 		<result property = "section" column = "section"/>
+ 		<result property = "phonenumber1" column = "phonenumber1"/>
+ 		<result property = "phonenumber2" column = "phonenumber2"/>
+ 		<result property = "phonenumber3" column = "phonenumber3"/>
+ 	</resultMap>
+ 	
+ 	<select id = "selectPro" resultMap = "proRes">
+ 		select * from student where section=2
+ 	</select>
+ 	
+ 	<select id = "selectProMajor" resultMap = "proRes" parameterClass="String">
+ 		select * from student where major=#major# and section=2
+ 	</select>
+ 	
+ </sqlMap>	
+ 

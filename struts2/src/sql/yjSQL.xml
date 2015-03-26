@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="yj">
+	<typeAlias alias="Requestdto" type="test.databean.RequestDTO" />
+	<typeAlias alias="Subjectdto" type="test.databean.SubjectDTO" />
+	
+	<!-- join 결과 나오는 dto 만들어주기 -->
+	<typeAlias alias="Stusubjoindto" type="test.databean.StuSubJoinDTO" />
+	<typeAlias alias="Reqsubjoindto" type="test.databean.ReqSubJoinDTO" />
+	
+	
+	 
+	 <!-- 수강신청 -->
+	<insert id="request" parameterClass="Requestdto">  
+		insert into request values(#rnum#,#rsubject#,#id#,#name#,#score#,#subnum#,#ssection#,#sday#,#stime#) 
+	</insert>
+  
+  	 
+ 	
+  	<resultMap class="Reqsubjoindto" id="reqsubjoin">
+  		 <result property="subnum" column="subnum" />
+  		 <result property="rsubject" column="rsubject" />
+  		 <result property="score" column="score" />
+  		 <result property="name" column="name" /> <!-- 교수이름 -->
+  		 <result property="sclass" column="sclass" />
+  		 <result property="stime" column="stime" />
+  		  <result property="sday" column="sday" />
+  		 <result property="ssection" column="ssection" />
+	  		 
+  </resultMap>
+  	
+  	<!-- 수강신청내역 -->
+  	<select id="requestlist" resultMap="reqsubjoin" parameterClass="String">
+  		select A.SUBNUM subnum, A.RSUBJECT rsubject, A.SCORE score, A.NAME name, A.SSECTION ssection, B.SCLASS sclass,B.SDAY sday, B.STIME stime 
+  		from REQUEST A INNER JOIN SUBJECT B ON A.SUBNUM=B.SNUMBER where A.ID=#id#
+  	</select>
+  		
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	  	 
+	<resultMap class="Stusubjoindto" id="t">
+		 <result property="snumber" column="snumber" />
+		 <result property="sname" column="sname" />
+		 <result property="stime" column="stime" />
+		 <result property="sday" column="sday" />
+		 <result property="sclass" column="sclass" />
+		 <result property="scredit" column="scredit" />
+		 <result property="proid" column="proid" />
+		 <result property="name" column="name" />
+		 <result property="ssection" column="ssection" />
+		  <result property="max" column="max" />
+		  <result property="count" column="count" />
+		  
+		  
+		 	 
+	</resultMap>
+  	
+  	
+  	<!-- 수강조회 -->
+  	<select id="yearselect" resultMap="t" parameterClass="Subjectdto">
+  		select A.SNUMBER snumber, A.SNAME sname, A.SDAY sday, A.STIME stime, A.SCLASS sclass, A.SCREDIT scredit, A.PROID proid, A.SSECTION ssection ,B.NAME name, A.MAX max, A.COUNT count 
+  		FROM  SUBJECT A INNER JOIN STUDENT B ON A.proid= B.id AND A.year=#year# AND A.grade=#grade# AND A.term=#term# AND A.ssection=#ssection#
+  	 </select>
+  	
+  	
+  	<!-- 정해진인원수 -->
+  	<select id="selectmax" resultClass="int"  parameterClass="Requestdto" >
+  		select max from subject where snumber=#subnum#
+  	</select>
+  	
+  	<!-- 수강신청인원수 -->
+ 
+	<select id="selectCount" resultClass="int" parameterClass="Requestdto">
+		select count from subject where snumber=#subnum#
+	</select>
+	
+	
+	<update id="updateCountUp" parameterClass="Requestdto">
+		update subject set count=count+1 where snumber=#subnum#
+	</update>
+  	
+  	
+  	<select id="selectIdSubject" resultClass="int" parameterClass="Requestdto">
+  		select count(*) from request where id=#id# and subnum=#subnum#
+  	</select>
+  	  
+  	  
+  	  
+  	  
+  	  
+  	  
+  	  
+   
+  	  
+  	<select id="selectSubjectStime" resultClass="String" parameterClass="Requestdto">
+  	 	select stime from subject where snumber=#subnum#
+  	</select>
+  	
+  	<select id="selectSubjectSday" resultClass="String" parameterClass="Requestdto">
+  	 	select sday from subject where snumber=#subnum#
+  	</select>
+  
+  	
+  	<select id="selectRequestStime" resultClass="String" parameterClass="String">
+  		select stime from request where id=#id# 
+  	</select>
+  	
+  	<select id="selectRequestSday" resultClass="String" parameterClass="String">
+  		select sday from request where id=#id#
+  	</select>
+  	
+  	
+  	<!-- 수강신청삭제 -->
+  	
+  	<delete id="deleteSubject" parameterClass="Requestdto">
+  		delete from request where id=#id# and subnum=#subnum#
+  	</delete>
+  	
+  	<update id="updateCountDown" parameterClass="Requestdto">
+  			update subject set count=count-1 where snumber=#subnum#
+  	</update>
+  	
+ </sqlMap>
+ 
+ 
+ 
