@@ -49,6 +49,10 @@
 	    
 	    <td>
 	    	<input type="submit" value="조회">
+	   	</td>
+	    <td>
+	    	<input type = "button" value = "메뉴로가기"
+			onClick="javascript:window.location='/struts2/menu.action?flag=0'">
 	    </td>
  	</tr> 
   </form>
