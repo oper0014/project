@@ -107,6 +107,8 @@ tbody tr:hover {
 		<td></td>
 	</tr>
 <c:forEach var="dto" items="${list}">
+<c:if test="${dto.state !=4}">
+
 	<tr>
 		<td>${dto.id}</td>
 		<td>${dto.name}</td>
@@ -124,7 +126,7 @@ tbody tr:hover {
 		</td>
 		<td><center>${dto.total}</center></td>
 		<td>
-		<c:if test="${dto.total >= '140'&& dto.state != 4 }">
+		<c:if test="${dto.total >= '140'}">
  			 <input type="button" value="졸업 처리" OnClick="location.href='/struts2/graduation.action?id=${dto.id}'">
 		</c:if>	
 		<c:if test="${dto.total<'140'}">
@@ -132,7 +134,46 @@ tbody tr:hover {
 		</c:if>
 		</td>
 	</tr>
+	</c:if>
+</c:forEach>
+
+</table>
+
+<h3>졸업 학생</h3>
+<table width = "800px">
+	<tr>
+		<td>학번</td>
+		<td>이름</td>
+		<td>전공</td>
+		<td>부전공</td>
+		<td>부전공</td>
+		<td>학년</td>
+		<td>학적 상태</td>
+		<td>총이수학점</td>
+		<td></td>
+	</tr>
+<c:forEach var="dto" items="${list}">
+<c:if test="${dto.state=='4'}">
+
+	<tr>
+		<td>${dto.id}</td>
+		<td>${dto.name}</td>
+		<td>${dto.major}</td>
+		<td>${dto.major2}</td>
+		<td>${dto.minor}</td>
+		<td>${dto.grade }</td>
+		<td>졸업</td>
+		<td><center>${dto.total}</center></td>
+		<td><input type="button" value="졸업 증명서 보기" OnClick="location.href='/struts2/regraduation.action?id=${dto.id}'">
+		</td>
+	</tr>
+	</c:if>
+	
 </c:forEach>
 </table>
+
+
+
+
 
 

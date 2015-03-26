@@ -63,11 +63,14 @@
 			<result>/admin/stgraduation.jsp</result>
 		</action>
 		<action name="graduation" class="admin.test.StGraduationProAction">
-			<interceptor-ref name = "prepare"/>
 			<interceptor-ref name ="params"/>
-		    <interceptor-ref name="servletConfig" />
 			<interceptor-ref name="ibatis"/>
 			<result>/admin/graduation.jsp</result>
+		</action>
+		<action name="regraduation" class="admin.test.ReGraduationAction">
+			<interceptor-ref name ="params"/>
+			<interceptor-ref name="ibatis"/>
+			<result>/admin/regraduation.jsp</result>
 		</action>
 		<action name="stsearch" class="admin.test.StSearchAction">
 			<interceptor-ref name="prepare" />

@@ -12,20 +12,23 @@
 		<result property = "minor" column = "minor"/>
 		<result property = "grade" column = "grade"/>
 		<result property = "state" column = "state"/>	
-		<result property = "total" column = "total"/>	
+		<result property = "total" column = "total"/>
+	    <result property = "degree" column = "degree"/>
+		
 	</resultMap>
 	
 	<select id = "selectGra" resultMap = "graRes">
-		select * from student where state!=4 and grade like '4%' or grade like '3%' order by grade desc 
+		select * from student where grade like '4%' or grade like '3%' order by grade desc 
 	</select>
 
-	<update id = "graduate" parameterClass="String">
-		update student set state='4' where id=#id#
+	<update id = "graduate" parameterClass="dto">
+		update student set state='4',degree=#degree# where id=#id#
 	</update>
 	
 	<select id = "selectGraRe" resultMap = "graRes" parameterClass="String">
 		select * from student where id=#id# 
 	</select>
+	
 
 </sqlMap>
  

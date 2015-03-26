@@ -17,6 +17,8 @@ public class MemberDTO {
 	private String mail2;
 	private String state;
 	private int section;
+	private String degree;
+	
 	public String getTotal() {
 		return total;
 	}
@@ -121,6 +123,12 @@ public class MemberDTO {
 	}
 	public void setSection(int section) {
 		this.section = section;
+	}
+	public String getDegree() {
+		return degree;
+	}
+	public void setDegree(String degree) {
+		this.degree = degree;
 	}
 	
 }

@@ -6,15 +6,18 @@
 <html>
 <head>
 <style>
+
 table{
     width: 700px;
     height : 800px;
     border: 3px solid #bcbcbc;
     padding : 50;
   }
+
 </style>
 </head>
 <body>
+
 <table align="center">
 	<tr>
 		<td style = "padding:20"><center><h1>졸업 증명서</h1></center></td>
@@ -45,7 +48,7 @@ table{
 		<td style = "padding-left : 50px">전공(학위): ${dto.major}</td>
 	</tr>
 		<tr>
-		<td style = "padding-left : 50px">학위(등록)번호 : ${degree}</td>
+		<td style = "padding-left : 50px">학위(등록)번호 : ${dto.degree}</td>
 	</tr>
 </c:forEach>
 	<tr>

@@ -11,7 +11,8 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import test.action.MemberDTO;
 import test.interceptor.SuperIbatis;
 
-public class StGraduationProAction implements SuperIbatis{
+public class ReGraduationAction implements SuperIbatis{
+
 	private String id = null;
 	private SqlMapClient sqlMapper = null;
 	private String result ="success";
@@ -21,17 +22,11 @@ public class StGraduationProAction implements SuperIbatis{
 	String year = dayTime1.format(new Date(time));
 	SimpleDateFormat dayTime2 = new SimpleDateFormat("MM");
 	String month = dayTime2.format(new Date(time));
-	private int degree = randomRange(100000, 999999);
-	private MemberDTO dto = new MemberDTO();
 	
 	public String execute(){		
-		dto.setDegree(degree+"");
-		dto.setId(id);
+		
 		try {
-			sqlMapper.update("graduate.graduate", dto);
 			list = sqlMapper.queryForList("graduate.selectGraRe", id);
-			
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,6 +40,7 @@ public class StGraduationProAction implements SuperIbatis{
 		// TODO Auto-generated method stub
 		this.sqlMapper = sqlMapper;
 	}
+	
 	public List getList(){
 		return list;
 	}
@@ -56,7 +52,6 @@ public class StGraduationProAction implements SuperIbatis{
 	public void setId(String id){
 		this.id = id;
 	}
-	
 	public String getYear(){
 		return year;
 	}
@@ -64,17 +59,4 @@ public class StGraduationProAction implements SuperIbatis{
 	public String getMonth(){
 		return month;
 	}
-	
-	public int randomRange(int n1, int n2){
-		return (int)(Math.random() * (n2-n1+1)) + n1;
-	}
-	
-	public int getDegree(){
-		return degree;
-	}
-	
-	public void setDegree(int degree){
-		this.degree = degree;
-	}
-	
 }
