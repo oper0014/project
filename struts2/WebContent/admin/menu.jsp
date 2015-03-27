@@ -61,7 +61,8 @@
 			href="/struts2/adminmenu.action?flag=6">졸업처리</a><br /> <a
 			href="/struts2/adminmenu.action?flag=7">학생검색</a><br /> <a
 			href="/struts2/adminmenu.action?flag=8">교수목록</a><br />
-			<a href="/struts2/adminmenu.action?flag=15">군입영 처리</a><br /><br />
+			<a href="/struts2/adminmenu.action?flag=15">군입영 처리</a><br />
+			<a href="/struts2/adminmenu.action?flag=20">강의실 편집</a><br />
 	</div>
 
 	<div id="section">
@@ -109,6 +110,10 @@
 		<c:if test="${flag==15 }">
 			<!-- 강좌 편집 -->
 			<s:action name="armyadmin" executeResult="true" />
+		</c:if>
+		<c:if test="${flag==20 }">
+			<!-- 강좌 편집 -->
+			<s:action name="classroomadmin" executeResult="true" />
 		</c:if>
 	</div>
 	<!--하단   -->

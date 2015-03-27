@@ -11,6 +11,7 @@
 		<typeAlias alias="createsubject" type="test.databean.CreateSubjectDTO" />
 		<typeAlias alias="armydto" type="pjs.ArmyDTO" />
 		<typeAlias alias="armysearchdto" type="test.databean.ArmySerDTO" />
+		<typeAlias alias="classroomdto" type="test.databean.ClassroomDTO" />
 		<resultMap id="admin" class="adminSQL">
 		<result property="id" column="id" />
 		<result property="name" column="name" />
@@ -81,6 +82,12 @@
 		<result property="armynumber" column="armynumber" />
 		<result property="state" column="state" />
 		<result property="reg_date" column="reg_date" />
+	</resultMap>
+	<!-- resultMap classroom -->
+	<resultMap id="classroomRes" class="classroomdto">
+		<result property="cnum" column="cnum" />
+		<result property="croom" column="croom" />
+		<result property="cmax" column="cmax" />
 	</resultMap>
 	<!-- 과목 목록 -->
 	<select id="subjectSer"  resultMap="subjectRes" parameterClass="String">
@@ -223,8 +230,26 @@
 	<update id="updatearmy2" parameterClass="String"> <!-- 업데이트 수정 휴학-->
 		update student set state=3 where id=#id#
 	</update>
-	
-	
+	<!-- 강의실 검색 -->
+	<select id="classroomAll"  resultMap="classroomRes" >
+		select * from classroom      
+	</select>
+	<!-- insert 강의실 추가 -->
+	<insert id="classroomUpdate" parameterClass="classroomdto">
+		INSERT INTO CLASSROOM
+		(CNUM,
+		CROOM,
+		CMAX
+		)
+		VALUES (
+		CLASSROOM_NO_SEQ.NEXTVAL,
+		#croom#,
+		#cmax#
+		)
+	</insert><!-- 강의실 삭제 -->
+	<delete id="classroomDelete" parameterClass="int">
+		DELETE FROM CLASSROOM where CNUM=#cnum#
+	</delete>
 	
 	</sqlMap>
 	

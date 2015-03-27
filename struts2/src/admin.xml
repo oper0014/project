@@ -104,5 +104,17 @@
 			<interceptor-ref name="ibatis"/>
 			<result>/admin/prosearch.jsp</result>
 		</action>
+		<action name="armyadmin" class="admin.test.ArmySerAction">
+			<interceptor-ref name = "prepare"/>
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name ="params"/>
+			<interceptor-ref name="ibatis"/>
+			<result>/admin/army.jsp</result>
+		</action>
+		<action name="classroomadmin" class="admin.test.CreateclassroomAction">
+			<interceptor-ref name ="params"/>
+			<interceptor-ref name="ibatis"/>
+			<result>/admin/classroom.jsp</result>
+		</action>
 	</package>
 </struts>
