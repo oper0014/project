@@ -54,7 +54,13 @@
 	</tr>
 	<tr>
 	<td width="200">시간 <input type="text" name="stime" size="12"></td>
-	<td width="200">교실 <input type="text" name="sclass" size="5"></td>
+	<td width="200">교실
+	<select name="sclass">	
+	<c:forEach items="${list3}" var="result3">
+	<option value="${result3.croom}">${result3.croom} =정원=${result3.cmax} </option>
+	</c:forEach>
+	</select>
+	</td>
 	<td width="200">이수코드 <input type="text" name="ssection" size="5"></td>
 	<td width="200">과목코드 <input type="text" name="snumber" size="12"></td>
 	</tr>

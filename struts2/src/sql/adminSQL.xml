@@ -251,5 +251,14 @@
 		DELETE FROM CLASSROOM where CNUM=#cnum#
 	</delete>
 	
+	<!--강의실 비교  count(*) subjectRes -->
+	<select id="classCheck" resultMap="subjectRes" parameterClass="createsubject">
+		select * from SUBJECT where sday=#sday# and sclass=#sclass#
+	</select>
+	<!-- 강의실 정원 -->
+	<select id="maxClass"  resultClass="String"  parameterClass="String">
+		select cmax from classroom where croom=#croom#   
+	</select>
+	
 	</sqlMap>
 	

@@ -48,6 +48,8 @@
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="params" />
 			<interceptor-ref name="ibatis" />
+			<result name="duplicate">/admin/duplicateerror.jsp</result>
+			<result name="maxerror">/admin/maxerror.jsp</result>
 			<result>/admin/createsubjectpro.jsp</result>
 		</action>
 		<action name="updatesubject" class="admin.test.UpdateSubjectAction">
