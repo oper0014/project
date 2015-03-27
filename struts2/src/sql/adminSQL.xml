@@ -9,7 +9,9 @@
 		<typeAlias alias="searchSubject" type="test.databean.SerSubjectDTO" />
 		<typeAlias alias="subjectdto2" type="test.databean.SubjectDTO" />
 		<typeAlias alias="createsubject" type="test.databean.CreateSubjectDTO" />
-<resultMap id="admin" class="adminSQL">
+		<typeAlias alias="armydto" type="pjs.ArmyDTO" />
+		<typeAlias alias="armysearchdto" type="test.databean.ArmySerDTO" />
+		<resultMap id="admin" class="adminSQL">
 		<result property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="pw" column="pw" />
@@ -69,6 +71,16 @@
 		<result property="count" column="count" />
 		<result property="sday" column="sday" />
 		<result property="stime" column="stime" />
+	</resultMap>
+		<!-- resultMap Army -->
+	<resultMap id="armyRes" class="armydto">
+		<result property="id" column="id" />
+		<result property="join" column="join" />
+		<result property="askdate" column="askdate" />
+		<result property="discharge" column="discharge" />
+		<result property="armynumber" column="armynumber" />
+		<result property="state" column="state" />
+		<result property="reg_date" column="reg_date" />
 	</resultMap>
 	<!-- 과목 목록 -->
 	<select id="subjectSer"  resultMap="subjectRes" parameterClass="String">
@@ -200,5 +212,19 @@
 		#stime#
 		)
 	</insert>
+	<!-- 군입영자 검색 -->
+	<select id="armyall"  resultMap="armyRes" parameterClass="Int">
+		select * from armyboard where state=#state#
+	</select>
+	<update id="updatearmy" parameterClass="String"> <!-- 업데이트 수정 복학-->
+		update armyboard set state=1,reg_date=sysdate where id=#id#
+	</update>
+	<!-- 군입영자 휴학 -->
+	<update id="updatearmy2" parameterClass="String"> <!-- 업데이트 수정 휴학-->
+		update student set state=3 where id=#id#
+	</update>
+	
+	
+	
 	</sqlMap>
 	

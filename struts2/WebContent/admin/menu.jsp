@@ -57,19 +57,15 @@
 		 <a
 			href="/struts2/adminmenu.action?flag=2">회원가입</a><br /> <a
 			href="/struts2/adminmenu.action?flag=3">성적입력</a><br /> <a
-			href="/struts2/adminmenu.action?flag=4">학적검색처리</a><br /> <a
 			href="/struts2/adminmenu.action?flag=5">강좌개설</a><br /> <a
 			href="/struts2/adminmenu.action?flag=6">졸업처리</a><br /> <a
 			href="/struts2/adminmenu.action?flag=7">학생검색</a><br /> <a
-			href="/struts2/adminmenu.action?flag=8">교수목록</a><br /><br />
+			href="/struts2/adminmenu.action?flag=8">교수목록</a><br />
+			<a href="/struts2/adminmenu.action?flag=15">군입영 처리</a><br /><br />
 	</div>
 
 	<div id="section">
 		<!--페이지   -->
-		<c:if test="${flag==0 }">
-			<!-- 해당 메뉴 이동 -->
-			<s:action name="artboard" executeResult="true" />
-		</c:if>
 		<c:if test="${flag==1 }">
 			<!-- 해당 메뉴 이동 -->
 			<s:action name="stduentinfo" executeResult="true" />
@@ -102,21 +98,17 @@
 			<!-- 해당 메뉴 이동 -->
 			<s:action name="prosearch" executeResult="true" />
 		</c:if>
+		<c:if test="${flag==11 }">
+			<!--강좌 만들기 -->
+			<s:action name="createsubjectpro" executeResult="true" />
+		</c:if>
+		<c:if test="${flag==12 }">
+			<!-- 강좌 편집 -->
+			<s:action name="updatesubject" executeResult="true" />
+		</c:if>
 		<c:if test="${flag==15 }">
-			<!-- 해당 메뉴 이동 -->
-			<s:action name="majorlist" executeResult="true" />
-		</c:if>
-		<c:if test="${flag==50 }">
-			<!-- 학과 자료실 뷰 -->
-			<s:action name="viewAction2" executeResult="true" />
-		</c:if>
-		<c:if test="${flag==51 }">
-			<!-- 학과 자료실 수정폼으로 -->
-			<s:action name="modifyForm2" executeResult="true" />
-		</c:if>
-		<c:if test="${flag==52 }">
-			<!-- 학과 자료실 삭제로 -->
-			<s:action name="deleteAction2" executeResult="true" />
+			<!-- 강좌 편집 -->
+			<s:action name="armyadmin" executeResult="true" />
 		</c:if>
 	</div>
 	<!--하단   -->

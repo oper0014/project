@@ -18,7 +18,7 @@ public class StSearchAction implements SuperIbatis,Preparable,ModelDriven {
 	private SqlMapClient sqlMapper;
 	private List<MajorDTO> list = new ArrayList<MajorDTO>();
 	
-	private String major;//�˻��� �а�
+	private String major;//占싯삼옙占쏙옙 占싻곤옙
 	private String grade;
 	private int gender;
 	private String state;
@@ -30,22 +30,22 @@ public class StSearchAction implements SuperIbatis,Preparable,ModelDriven {
 	private List<MemberDTO> list4 = new ArrayList<MemberDTO>();
 	private List<MemberDTO> list5 = new ArrayList<MemberDTO>();
 	private List<MemberDTO> list6 = new ArrayList<MemberDTO>();
-	private int currentPage = 1;	//���� ������
-	private int totalCount; 		// �� �Խù��� ��
-	private int blockCount = 10;	// �� ��������  �Խù��� ��
-	private int blockPage = 5; 	// �� ȭ�鿡 ������ ������ ��
-	private String pagingHtml; 	//����¡�� ������ HTML
-	private pagingAction page; 	// ����¡ Ŭ����
+	private int currentPage = 1;	//占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+	private int totalCount; 		// 占쏙옙 占쌉시뱄옙占쏙옙 占쏙옙
+	private int blockCount = 10;	// 占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙  占쌉시뱄옙占쏙옙 占쏙옙
+	private int blockPage = 5; 	// 占쏙옙 화占썽에 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙
+	private String pagingHtml; 	//占쏙옙占쏙옙징占쏙옙 占쏙옙占쏙옙占쏙옙 HTML
+	private pagingAction page; 	// 占쏙옙占쏙옙징 클占쏙옙占쏙옙
 	private String grade_selected;//
-	private String state_selected2;//����ó��
-	private String state_selected1;//����ó��
-	private String chk_info;//üũ�ڽ�
+	private String state_selected2;//占쏙옙占쏙옙처占쏙옙
+	private String state_selected1;//占쏙옙占쏙옙처占쏙옙
+	private String chk_info;//체크占쌘쏙옙
 	
 	public String execute() throws SQLException{
 		
 		
 		
-		list = sqlMapper.queryForList("board.selectMajorAll");//�а� ��� ������
+		list = sqlMapper.queryForList("board.selectMajorAll");//占싻곤옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙
 		System.out.println("selectMajor:"+dto.getMajor());
 		System.out.println("selectGrade:"+dto.getGrade());
 		System.out.println("selectGender:"+dto.getGender());
@@ -81,42 +81,45 @@ public class StSearchAction implements SuperIbatis,Preparable,ModelDriven {
 			}	
 		}
 		
-		totalCount = list2.size(); // ��ü �� ������ ���Ѵ�.
+		totalCount = list2.size(); // 占쏙옙체 占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占싼댐옙.
 		System.out.println("totalCount:::::"+totalCount);
-		
+		System.out.println("flag2:::::"+flag2);
 			if(flag2==1){
 				
 				String[] result = chk_info.trim().replaceAll(" ", "").split(",");
+				//System.out.println("result"+result);
 				
 				for (int j = 0; j < result.length; j++) {
 					System.out.println(result[j]);
-					
-					if(state_selected2 == null ){}//����ó��
-					else{
-						System.out.println("����");
+					System.out.println("grade_selected"+grade_selected);
+					System.out.println("state_selected1"+state_selected1);
+					System.out.println("state_selected2"+state_selected2);
+					if(state_selected2.equals("복학처리"))
+					{
+						System.out.println("복학처리");
 						sqlMapper.update("admin.st_update3b", result[j]);
 						dto.setState("1");
 					}
-					if(state_selected1 == null ){}//����ó��
-					else{System.out.println("����");
+					if(state_selected1.equals("휴학처리"))
+					{System.out.println("휴학처리");
 						sqlMapper.update("admin.st_update3a", result[j]);
 						dto.setState("2");
 					}
-					if(grade_selected == null ){}//�г��
-					else{
+					if(grade_selected.equals("학년업"))
+					{
 						String gradeinfor=(String)sqlMapper.queryForObject("admin.selectGrade",result[j]);
 						
-						if(gradeinfor.equals("1�г�"))
+						if(gradeinfor.equals("1학년"))
 							{sqlMapper.update("admin.st_update2a", result[j]);	
-							dto.setGrade("2�г�");
+							dto.setGrade("2학년");
 							}
-						else if(gradeinfor.equals("2�г�"))
+						else if(gradeinfor.equals("2학년"))
 							{sqlMapper.update("admin.st_update2b", result[j]);	
-							dto.setGrade("3�г�");
+							dto.setGrade("3학년");
 							}
-						else if(gradeinfor.equals("3�г�"))
+						else if(gradeinfor.equals("3학년"))
 							{sqlMapper.update("admin.st_update2c", result[j]);
-							dto.setGrade("4�г�");
+							dto.setGrade("4학년");
 							}
 					}//else					
 				}//for
@@ -124,21 +127,6 @@ public class StSearchAction implements SuperIbatis,Preparable,ModelDriven {
 				if(dto.getMajor().equals("All") ){list2 = sqlMapper.queryForList("admin.stall2",dto);}
 				else{list2 = sqlMapper.queryForList("admin.stall",dto);}
 			}
-			
-			/*
-			page = new pagingAction(currentPage, totalCount, blockCount, blockPage); // pagingAction ��ü ����.
-			pagingHtml = page.getPagingHtml().toString(); // ������ HTML ����.
-
-			// ���� ���������� ������ ������ ���� ��ȣ ����.
-			int lastCount = totalCount;
-
-			// ���� �������� ������ ���� ��ȣ�� ��ü�� ������ �� ��ȣ���� ������ lastCount�� +1 ��ȣ�� ����.
-			if (page.getEndCount() < totalCount)
-				lastCount = page.getEndCount() + 1;
-
-			// ��ü ����Ʈ���� ���� ��������ŭ�� ����Ʈ�� �����´�.
-			list2 = list2.subList(page.getStartCount(), lastCount);
-			 */
 		}catch(Exception e){}
 		String result2 ="success";
 		return result2;
@@ -208,7 +196,7 @@ public class StSearchAction implements SuperIbatis,Preparable,ModelDriven {
 	}
 	@Override
 	public void prepare() throws Exception {
-		dto=new stSearchDTO();		//dto�� �����ϸ� ���Թ޴°͵�
+		dto=new stSearchDTO();		//dto占쏙옙 占쏙옙占쏙옙占싹몌옙 占쏙옙占쌉받는것듸옙
 	}
 	public stSearchDTO getDto() {
 		return dto;
