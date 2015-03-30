@@ -19,17 +19,18 @@
 	</resultMap>
 	
 	<select id = "selectAll" resultMap = "subRes">
-		select* from subject left join major on subject.ssection=major.majornum left join student on subject.proid=student.id
+		select* from subject left join major on subject.ssection=major.majornum left join student on subject.proid=student.id 
+		order by snumber
 	</select>
 	
 	<select id = "selectmajor" resultMap = "subRes" parameterClass = "String">
 		select* from subject left join major on subject.ssection=major.majornum left join student on subject.proid=student.id
-		where subject.ssection=#major#
+		where subject.ssection=#major# order by snumber
 	</select>
 	
-	<select id = "selecttime" resultMap = "subRes" parameterClass = "Integer">
+	<select id = "selecttime" resultMap = "subRes" parameterClass = "String">
 		select* from subject left join major on subject.ssection=major.majornum left join student on subject.proid=student.id
-		where subject.stime=#time#
+		where subject.stime like '%'||#stime#||'%' order by snumber
 	</select>
 
 </sqlMap>

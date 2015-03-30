@@ -99,11 +99,12 @@ tbody tr:hover {
 <body>
 	<h2>교수 정보 보기</h2>
 
-	<form action="promajorsearch.action" method="post">
+	<form action="adminmenu.action" method="post">
+		<input type="hidden" name="flag" value="30">
 		전공 : <select name="major">
 			<option value="">전공 선택</option>
 			<option value="미디어소프트웨어">미디어소프트웨어</option>
-			<option value="컴퓨터소프트웨어">컴퓨터소프트웨어</option>
+			<option value="컴퓨터공학">컴퓨터공학</option>
 			<option value="영어교육">영어교육</option>
 		</select> <input type="submit" value="검색" />
 	</form>
@@ -117,9 +118,9 @@ tbody tr:hover {
 		<c:forEach var="dto" items="${list}">
 
 			<tr>
-				<td>${dto.name}</td>
+				<td><a href = "">${dto.name}</a></td>
 				<td>${dto.major }</td>
-				<td>${dto.mail1}@${dto.mail2}</td>
+				<td>${dto.mail1}@${dto.mail2}</td> 
 				<td>${dto.phonenumber1}- ${dto.phonenumber2} -
 					${dto.phonenumber3}</td>
 			</tr>

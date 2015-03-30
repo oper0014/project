@@ -111,10 +111,21 @@ tbody tr:hover {background: #fafafa;}
 		<c:if test="${dto.state=='1'}">
 		재학중
 		</c:if>
-		<c:if test="${dto.state=='0'}">
+		<c:if test="${dto.state=='2'}">
 		휴학중 
-		</c:if
-		>
+		</c:if>
+		<c:if test="${dto.state=='3'}">
+		군휴학중 
+		</c:if>
+		<c:if test="${dto.state=='4'}">
+		졸업
+		</c:if>
+		<c:if test="${dto.state=='5'}">
+		휴학대기중
+		</c:if>
+		<c:if test="${dto.state=='6'}">
+		복학대기중
+		</c:if>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type = "button" value = "신청" onclick="location.href='http://localhost:8000/struts2/gobackSubmit.action'"/>
 		

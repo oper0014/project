@@ -115,6 +115,12 @@
 			<!-- °­ÁÂ ÆíÁý -->
 			<s:action name="classroomadmin" executeResult="true" />
 		</c:if>
+		<c:if test="${flag==30 }">
+			<!-- °­ÁÂ ÆíÁý -->
+			<s:action name="promajorsearch" executeResult="true" />
+		</c:if>
+		
+		
 	</div>
 	<!--ÇÏ´Ü   -->
 	<div id="footer">Copyright KH Academy B Class Team:6</div>

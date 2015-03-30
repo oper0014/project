@@ -144,6 +144,10 @@
 			<!-- 학과 자료실 삭제로 -->
 			<s:action name="deleteAction2" executeResult="true" />
 		</c:if>
+		<c:if test="${flag==30 }">
+			<!-- 강좌 편집 -->
+			<s:action name="schedulesearch" executeResult="true" />
+		</c:if>
 	</div>
 	<!--하단   -->
 	<div id="footer">Copyright KH Academy B Class Team:6</div>

@@ -128,10 +128,12 @@
 	<update id="goback_submit" parameterClass="String">
 		update student set state =
 		case
-		when state = '0'
-		then '1'
 		when state = '1'
-		then '0'
+		then '5'
+		when state = '2'
+		then '6'
+		when state = '3'
+		then '6'
 		end
 		where id=#id#
 	</update>

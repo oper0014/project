@@ -69,18 +69,21 @@ tbody tr:hover {background: #fafafa;}
 
 <h2>전체 시간표 조회</h2>
 
-	<form action="schedulesearch.action">
+	<form action="menu.action" method="post">
+		<input type="hidden" name="flag" value="30">
 	전공 :
 	<select name = "major">
 		<option value = "">전공</option>
-		<option value = "111">media software</option>
+		<option value = "111">미디어소프트웨어</option>
+		<option value = "410">컴퓨터공학</option>
 		<option value = "100">교양</option>
 	</select>
 	<input type = "submit" value = "검색" />
 	<br />
 	</form>
 	
-	<form action="schedulesearch.action">
+	<form action="menu.action"method="post">
+		<input type="hidden" name="flag" value="30">
 	강의시간 : 
 	<select name = "time">
 		<option value = "">강의시간</option>
@@ -88,6 +91,9 @@ tbody tr:hover {background: #fafafa;}
 		<option value = "2">2교시</option>
 		<option value = "3">3교시</option>
 		<option value = "4">4교시</option>
+		<option value = "5">5교시</option>
+		<option value = "6">6교시</option>
+		<option value = "7">7교시</option>
 	</select>
 	<input type = "submit" value = "검색" />
 	</form>

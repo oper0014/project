@@ -11,7 +11,7 @@ import test.interceptor.SuperIbatis;
 
 public class ScheduleSearchAction implements SuperIbatis{
 	private String major = null;
-	private int time;
+	private String time;
 	private SqlMapClient sqlMapper = null;
 	private String result ="success";
 	private List<TotalsubjectDTO> list = new ArrayList<TotalsubjectDTO>();
@@ -22,7 +22,6 @@ public class ScheduleSearchAction implements SuperIbatis{
 			list=sqlMapper.queryForList("subject.selectmajor",major);
 		}else{
 			list=sqlMapper.queryForList("subject.selecttime",time);
-
 		}
 		
 			
@@ -33,11 +32,6 @@ public class ScheduleSearchAction implements SuperIbatis{
 		return result;
 	}
 
-
-	
-	
-	
-	
 	public List getList(){
 		return list;
 	}
@@ -57,11 +51,11 @@ public class ScheduleSearchAction implements SuperIbatis{
 		this.sqlMapper = sqlMapper;
 	}
 	
-	public int getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
