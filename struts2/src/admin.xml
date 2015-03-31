@@ -106,6 +106,23 @@
 			<interceptor-ref name="ibatis"/>
 			<result>/admin/prosearch.jsp</result>
 		</action>
+		<action name="promodify" class="admin.test.ProModifyAction">
+			<interceptor-ref name ="params"/>
+			<interceptor-ref name="ibatis"/>
+			<result>/admin/promodify.jsp</result>
+		</action>
+		<action name="prostate" class="admin.test.ProStateAction">
+			<interceptor-ref name ="params"/>
+			<interceptor-ref name="ibatis"/>
+			<result name = "update">/admin/promodify_pro.jsp</result>
+		</action>
+		<action name="proInfoSubmit" class="admin.test.ProInfoSubmitAction">
+			<interceptor-ref name = "prepare"/>
+			<interceptor-ref name = "modelDriven"/>
+			<interceptor-ref name ="params"/>
+			<interceptor-ref name="ibatis"/>
+			<result>/admin/promodify_pro.jsp</result>
+		</action>
 		<action name="armyadmin" class="admin.test.ArmySerAction">
 			<interceptor-ref name = "prepare"/>
 			<interceptor-ref name="modelDriven" />
@@ -118,5 +135,6 @@
 			<interceptor-ref name="ibatis"/>
 			<result>/admin/classroom.jsp</result>
 		</action>
+		
 	</package>
 </struts>

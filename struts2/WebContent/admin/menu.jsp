@@ -116,8 +116,12 @@
 			<s:action name="classroomadmin" executeResult="true" />
 		</c:if>
 		<c:if test="${flag==30 }">
-			<!-- 강좌 편집 -->
+			<!-- 교수 목록 -->
 			<s:action name="promajorsearch" executeResult="true" />
+		</c:if>
+		<c:if test="${flag==31 }">
+			<!-- 교수 정보 편집 -->
+			<s:action name="promodify" executeResult="true" />
 		</c:if>
 		
 		

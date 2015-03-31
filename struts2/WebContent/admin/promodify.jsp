@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>교수 목록</title>
+
 <style>
 /* Greyscale
 Table Design by Scott Boyle, Two Plus Four
@@ -94,38 +91,13 @@ tbody tr:hover {
 	background: #fafafa;
 }
 </style>
-
-</head>
 <body>
-	<h2>교수 정보 보기</h2>
-
-	<form action="adminmenu.action" method="post">
-		<input type="hidden" name="flag" value="30">
-		전공 : <select name="major">
-			<option value="">전공 선택</option>
-			<option value="미디어소프트웨어">미디어소프트웨어</option>
-			<option value="컴퓨터공학">컴퓨터공학</option>
-			<option value="영어교육">영어교육</option>
-		</select> <input type="submit" value="검색" />
-	</form>
-	<table width="600px">
+	<h3>교수 정보 변경</h3>
+	<form action = "proInfoSubmit.action" method="post" >
+	<input type="hidden" name="id" value="${dto.id}">
+		<table width="600px">
 		<tr>
-			<td>교수 이름</td>
-			<td>학과</td>
-			<td>E-mail</td>
-			<td>전화번호</td>
-			<td>재직 상태</td>
-		</tr>
-		<c:forEach var="dto" items="${list}">
-
-			<tr>
-				<td><a href = "adminmenu.action?id=${dto.id}&flag=31">${dto.name}</a>
-				</td>
-				<td>${dto.major }</td>
-				<td>${dto.mail1}@${dto.mail2}</td> 
-				<td>${dto.phonenumber1}- ${dto.phonenumber2} -
-					${dto.phonenumber3}</td>
-				<td>
+			<td colspan = "2">
 				<c:if test="${dto.state == 1}">
 					재직중
 				</c:if>	
@@ -135,10 +107,40 @@ tbody tr:hover {
 				<c:if test="${dto.state !=2 && dto.state !=1}">
 					정보없음
 				</c:if>
-				</td>
-			</tr>
-		</c:forEach>
+				&nbsp;&nbsp;
+				<input type ="button" value = "변경" name = "pro_state" onclick="location.href='http://localhost:8000/struts2/prostate.action?id=${dto.id}'"/>
+			</td>
+		</tr>
+		<tr>
+			<td>교수 코드</td>
+			<td>${dto.id}</td>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td><input type = "text" size = "20" maxlength = "20" name = "name" value = "${dto.name}"></td>
+		</tr>
+		<tr>
+			<td>전공 학과</td>
+			<td><input type = "text" size = "20" maxlength = "20" name = "major" value = "${dto.major}"></td>
+		</tr>
+		<tr>
+			<td>E-mail</td>
+			<td><input type = "text" size = "10" maxlength = "15" name = "mail1" value = "${dto.mail1}">@
+				<input type = "text" size = "10" maxlength = "15" name = "mail2" value = "${dto.mail2}"></td>
+		</tr>
+		<tr>
+			<td>전화번호</td>
+			<td><input type = "text" size = "5" maxlength = "8" name = "phonenumber1" value = "${dto.phonenumber1}">
+			-<input type = "text" size = "5" maxlength = "8" name = "phonenumber2" value = "${dto.phonenumber2}">
+			-<input type = "text" size = "5" maxlength = "8" name = "phonenumber3" value = "${dto.phonenumber3}"></td>
+		</tr>
+		<tr>
+			<td colspan = "2">
+			<input type ="button" value = "취소" onclick="location.href='http://localhost:8000/struts2/adminmenu.action?flag=8'"/>
+			&nbsp;
+			<input type = "submit" value = "정보 변경"/>
+			</td>
+		</tr>
 	</table>
-
+	</form>
 </body>
-</html>

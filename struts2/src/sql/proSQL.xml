@@ -10,6 +10,7 @@
  		<result property = "major" column = "major"/>
  		<result property = "mail1" column = "mail1"/>
  		<result property = "mail2" column = "mail2"/>
+ 		<result property = "state" column = "state"/>
  		<result property = "section" column = "section"/>
  		<result property = "phonenumber1" column = "phonenumber1"/>
  		<result property = "phonenumber2" column = "phonenumber2"/>
@@ -23,6 +24,28 @@
  	<select id = "selectProMajor" resultMap = "proRes" parameterClass="String">
  		select * from student where major=#major# and section=2
  	</select>
+ 	
+ 	<select id = "selectOne" resultMap = "proRes" parameterClass = "String">
+ 		select * from student where id=#id# and section = 2
+ 	</select>
+ 	
+ 	<update id = "proUpdate" parameterClass = "prodto">
+ 		update student set name=#name#, major=#major#, mail1=#mail1#, mail2=#mail2#, phonenumber1=#phonenumber1#, phonenumber2=#phonenumber2#, phonenumber3=#phonenumber3#
+ 		 where id=#id#
+ 	</update>
+ 	
+ 	<update id = "prostate" parameterClass="String">
+ 		update student set state =
+		case
+		when state = '1'
+		then '2'
+		when state = '2'
+		then '1'
+		end 
+		where
+		id = #id#
+ 	</update>
+
  	
  </sqlMap>	
  
