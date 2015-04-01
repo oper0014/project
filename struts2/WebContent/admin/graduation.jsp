@@ -15,15 +15,15 @@ table{
   }
 
 </style>
-</head>
+</head> 
 <body>
 <table align="center" background="/struts2/admin/img/kh.png">
-	<tr>
+	<tr >
 		<td style = "padding:20"><center><h1>졸업 증명서</h1></center></td>
 	</tr>
 	<c:forEach var="dto" items="${list}">
 	<tr >
-		<td style = "padding-left : 50px">학번 : ${dto.id}</td> 
+		<td style = "padding-left : 50px , bgcolor = #ffffff">학번 : ${dto.id}</td> 
 	</tr>
 	
 	<tr>
