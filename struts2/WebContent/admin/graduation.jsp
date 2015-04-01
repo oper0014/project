@@ -11,11 +11,13 @@ table{
     height : 800px;
     border: 3px solid #bcbcbc;
     padding : 50;
+    background : url("/struts2/admin/img/kh.png");
   }
+
 </style>
 </head>
 <body>
-<table align="center">
+<table align="center" background="/struts2/admin/img/kh.png">
 	<tr>
 		<td style = "padding:20"><center><h1>졸업 증명서</h1></center></td>
 	</tr>

@@ -106,6 +106,8 @@ tbody tr:hover {
 			<option value="미디어소프트웨어">미디어소프트웨어</option>
 			<option value="컴퓨터공학">컴퓨터공학</option>
 			<option value="영어교육">영어교육</option>
+			<option value="화학과">화학과</option>
+			<option value="의류학과">의류학과</option>
 		</select> <input type="submit" value="검색" />
 	</form>
 	<table width="600px">

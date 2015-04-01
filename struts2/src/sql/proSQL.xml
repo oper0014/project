@@ -18,7 +18,7 @@
  	</resultMap>
  	
  	<select id = "selectPro" resultMap = "proRes">
- 		select * from student where section=2
+ 		select * from student where section=2 order by major
  	</select>
  	
  	<select id = "selectProMajor" resultMap = "proRes" parameterClass="String">
